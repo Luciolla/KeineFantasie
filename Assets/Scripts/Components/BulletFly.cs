@@ -27,6 +27,16 @@ namespace Fantasie
             transform.SetParent(null);
         }
 
+        //private void OnTriggerEnter2D(Collider2D collision)
+        //{
+        //    Debug.Log(collision);
+        //    if (collision != null)
+        //    {
+        //        _bullet.gameObject.SetActive(false);
+        //        ResetTransform();
+        //    }
+        //}
+
         private IEnumerator FlyBulletRutine()
         {
             while (true)
