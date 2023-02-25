@@ -6,6 +6,7 @@ namespace Fantasie
 {
     public class ShootWeapon : MonoBehaviour
     {
+        [SerializeField] private GameObject _sparks;
         [SerializeField] private List<GameObject> _bulletList;
         [Header("Shoots per minute")]
         [SerializeField] private float _shootingSpeed;
@@ -31,6 +32,7 @@ namespace Fantasie
 
             if (_canShoot && _canShootLocal)
             {
+                _sparks.gameObject.SetActive(true);
                 _bulletList[_ammoCount].gameObject.SetActive(true);
                 _ammoCount++;
                 StartCoroutine(OnShootRutine());
@@ -46,6 +48,7 @@ namespace Fantasie
             while (true)
             {
                 yield return new WaitForSecondsRealtime(_shootingSpeedModif/_shootingSpeed);
+                _sparks.gameObject.SetActive(false);
                 _canShootLocal = true;
                 yield break;
             }

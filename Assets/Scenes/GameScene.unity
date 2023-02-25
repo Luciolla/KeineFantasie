@@ -3814,6 +3814,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1563778868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6980136714266294866, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
+  m_PrefabInstance: {fileID: 6554495018460396028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1759229755
 GameObject:
   m_ObjectHideFlags: 0
@@ -4082,6 +4087,14 @@ PrefabInstance:
       propertyPath: _firePoint
       value: 
       objectReference: {fileID: 643801194}
+    - target: {fileID: 2885134503718562005, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
+      propertyPath: _sparks
+      value: 
+      objectReference: {fileID: 1563778868}
+    - target: {fileID: 2885134503718562005, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
+      propertyPath: _shootingSpeed
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 4419197248480990118, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.73
@@ -4158,6 +4171,10 @@ PrefabInstance:
       propertyPath: _firePoint
       value: 
       objectReference: {fileID: 643801194}
+    - target: {fileID: 6980136714266294866, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8998229968926011345, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
       propertyPath: _firePoint
       value: 
