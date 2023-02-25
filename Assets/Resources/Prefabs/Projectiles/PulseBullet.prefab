@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 599700390811761844}
   - component: {fileID: 599700390811761845}
   - component: {fileID: 3246956045626885844}
-  - component: {fileID: -845164794304966370}
+  - component: {fileID: 8034469753450089181}
   - component: {fileID: -5889428113877766345}
   m_Layer: 0
   m_Name: PulseBullet
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599700390811761846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 1.35, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,8 +129,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &-845164794304966370
-CircleCollider2D:
+--- !u!70 &8034469753450089181
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -139,12 +139,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.3150001
+  m_Offset: {x: 0.026708119, y: -0.018695652}
+  m_Size: {x: 0.71347153, y: 0.7476089}
+  m_Direction: 0
 --- !u!114 &-5889428113877766345
 MonoBehaviour:
   m_ObjectHideFlags: 0
