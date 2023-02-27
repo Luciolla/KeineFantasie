@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BotController : MonoBehaviour
+namespace Fantasie
 {
-    // Start is called before the first frame update
-    void Start()
+    public class BotController : BaseInputController
     {
-        
-    }
+        [SerializeField] private EnemyTypeEnum _enemyTypeType;
+        [SerializeField] private GameObject _enemy;
+        [Header("components links")]
+        [SerializeField] private CheckLayer _checkLayer;
+        [SerializeField] private ShootWeapon _weapon;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
+        [SerializeField] private Animator _animator;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected override void FixedUpdate()
+        {
+
+        }
     }
 }

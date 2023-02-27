@@ -20,6 +20,7 @@ namespace Fantasie
             StartCoroutine(FlyBulletRutine());
         }
 
+        #region ResetTransform
         private void ResetTransform()
         {
             transform.localPosition = Vector3.zero;
@@ -27,27 +28,30 @@ namespace Fantasie
             transform.SetParent(null);
         }
 
-        //private void OnTriggerEnter2D(Collider2D collision)
-        //{
-        //    Debug.Log(collision);
-        //    if (collision != null)
-        //    {
-        //        _bullet.gameObject.SetActive(false);
-        //        ResetTransform();
-        //    }
-        //}
+        private void ResetTransform(Transform value)
+        {
+            _bullet.gameObject.SetActive(false);
+            transform.SetParent(value);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = value.localRotation;
+        }
+        #endregion
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision != null)
+            {
+                ResetTransform(_firePoint.transform);
+            }
+        }
 
         private IEnumerator FlyBulletRutine()
         {
             while (true)
             {
                 _bulletBody.AddForce(transform.up * _shootingForce, ForceMode2D.Impulse);
-
                 yield return new WaitForSecondsRealtime(_lifeTime);
-                _bullet.gameObject.SetActive(false);
-                transform.SetParent(_firePoint.transform);
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = _firePoint.transform.localRotation;
+                ResetTransform(_firePoint.transform);
                 yield break;
             }
         }
