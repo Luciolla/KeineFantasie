@@ -4,12 +4,12 @@ namespace Fantasie
 {
     public class PlayerController : BaseInputController
     {
-        [SerializeField] private Rigidbody2D _rigidbody2D;
-        [SerializeField] private Animator _animator;
         [SerializeField] private GameObject _player;
-        [Header("components link")]
+        [Header("components links")]
         [SerializeField] private CheckLayer _checkLayer;
         [SerializeField] private ShootWeapon _weapon;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
+        [SerializeField] private Animator _animator;
 
         private InputControls _controls;
 

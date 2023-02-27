@@ -21,10 +21,7 @@ namespace Fantasie
             set => _canShoot = value;
         }
 
-        private void LateUpdate()
-        {
-            ApplyShoot();
-        }
+        private void LateUpdate() => ApplyShoot();
 
         private void ApplyShoot()
         {
