@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Fantasie
 {
-    public class BulletFly : MonoBehaviour
+    [RequireComponent(typeof(CapsuleCollider2D))]
+    public class BulletFly : MonoBehaviour, ICausingDamage
     {
         //todo take projectile stats from SO
         [SerializeField] private GameObject _bullet;
@@ -12,7 +13,9 @@ namespace Fantasie
         [SerializeField] private GameObject _firePoint;
         [SerializeField] private float _lifeTime;
         [SerializeField] private float _shootingForce;
-        //[SerializeField] private float _damage;
+        [SerializeField] private float _damage;
+
+        public float GetDamage { get => _damage; }
 
         private void OnEnable()
         {
@@ -37,7 +40,7 @@ namespace Fantasie
         }
         #endregion
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision != null)
             {
