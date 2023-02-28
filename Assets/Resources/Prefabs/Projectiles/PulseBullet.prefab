@@ -139,7 +139,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.026708119, y: -0.018695652}
@@ -163,3 +163,4 @@ MonoBehaviour:
   _firePoint: {fileID: 8702099976947265672, guid: c760092370281204fac287d7fe00f23a, type: 3}
   _lifeTime: 1
   _shootingForce: 100
+  _damage: 5
