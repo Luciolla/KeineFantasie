@@ -6,15 +6,12 @@ using Random = System.Random;
 
 namespace Fantasie
 {
-    public class BotController : BaseInputController
+    public class BotController : BaseInputController //todo separate to some new components
     {
         [SerializeField] private EnemyTypeEnum _enemyTypeType;
+        [SerializeField] private EnemyBehaviourEnum _enemyBehaviour;
         [SerializeField] private GameObject _enemy;
-        [Header("AI Weights modif")]
-        [SerializeField, Range(-1, 1)] private float _stopModif;
-        [SerializeField, Range(-1, 1)] private float _jumpModif;
-        [SerializeField, Range(-1, 1)] private float _attackModif;
-        [SerializeField, Range(-1, 1)] private float _changeWalkSideModif;
+        [SerializeField] private float _patrolRadius;
         [Header("components links")]
         [SerializeField] private CheckLayer _checkLayer;
         [SerializeField] private ShootWeapon _weapon;
@@ -22,19 +19,22 @@ namespace Fantasie
         [SerializeField] private Animator _animator;
 
         private Random _rand = new();
+        private Vector2 _startPosition;
         private float _xVelocity = 0f;
         private float _yVelocity = 0f;
         private int _jumpCount = 0;
+        private int _patrolState = 0;
+        private int _lastPatrolState = 0;
+        private int _reflectionCooldown = 2;
         private bool _isOnGround = false;
         private bool _isNotSeePlayer = true;
-        private bool _isCooldown = false;
+        private bool _isAttack = false;
 
-        #region AIWeights
-        private float _currentWalkSide;
-        private float _currentJumpWieght;
-        private float _currentattackieght;
-        private float _currentStopWieght;
-        #endregion
+        private void Awake()
+        {
+            _startPosition = transform.position;
+            StartCoroutine(StopEnemyForSomeReflectionRutine());
+        }
 
         protected override void FixedUpdate()
         {
@@ -42,34 +42,74 @@ namespace Fantasie
             ApplyAnimation();
             UpdateSpriteDirection();
             PrimitiveAISolutions();
+            CheckPatrolRadius();
             _isOnGround = IsGrounded();
         }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            var status = other.TryGetComponent(out CreatureType type);
+
+            if (type.GetCreatureType != CreatureTypeEnum.Player) return;
+
+            _isNotSeePlayer = false;
+            Debug.Log("ß òåáÿ, ñóêà, âèæó!");
+            _patrolState = 1;
+            _lastPatrolState = 1;
+
+        }
+
         private bool IsGrounded()
         {
             return _checkLayer.IsTouchingLayer;
         }
 
-        private void PrimitiveAISolutions() //todo separate to new component 
+        private void PrimitiveAISolutions()
         {
-            if (_isNotSeePlayer)
-            {
-                if (!_isCooldown)
-                {
-                    _currentWalkSide = _rand.Next(-1, 2);
-
-                    Direction = _currentWalkSide == 0 ? Vector2.zero : Vector2.right * _currentWalkSide;
-                    StartCoroutine(ÑooldownRutine(_rand.Next(1, 3)));
-                }
-            }
-
+            //if (!_isNotSeePlayer) return;
+            Debug.Log(_patrolState);
+            ApplyPatrol(_patrolState);
         }
 
-        private IEnumerator ÑooldownRutine(int cooldown)
+        private void ApplyPatrol(int state)
         {
-            _isCooldown = true;
-            yield return new WaitForSecondsRealtime(cooldown);
-            _isCooldown = false;
-            yield break;
+            switch (state)
+            {
+                case 0:
+                    Direction = Vector2.left;
+                    break;
+                case 1:
+                    Direction = Vector2.zero;
+                    break;
+                case 2:
+                    Direction = Vector2.right;
+                    break;
+            }
+        }
+
+        private IEnumerator StopEnemyForSomeReflectionRutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSecondsRealtime(_reflectionCooldown);
+                _lastPatrolState = _patrolState;
+                _patrolState = 1;
+                yield return new WaitForSecondsRealtime(_reflectionCooldown);
+                _patrolState = _lastPatrolState;
+                _reflectionCooldown = _rand.Next(1, 5);
+            }
+        }
+
+        private void CheckPatrolRadius()
+        {
+            if (_startPosition.x - transform.position.x > _patrolRadius)
+            {
+                _patrolState = 2;
+            }
+            if (_startPosition.x - transform.position.x < -_patrolRadius)
+            {
+                _patrolState = 0;
+            }
         }
 
         private void OnMovement()
@@ -105,6 +145,7 @@ namespace Fantasie
         private void ApplyAnimation()
         {
             _animator.SetBool("is-Grounded", _isOnGround);
+            _animator.SetBool("is-Attack", _isAttack);
             _animator.SetBool("is-Walk", _rigidbody2D.velocity.x != 0 && _isOnGround);
             _animator.SetBool("is-Jump", _rigidbody2D.velocity.y != 0);
         }
