@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Fantasie
@@ -21,13 +19,13 @@ namespace Fantasie
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision == null) return;
-            collision.gameObject.TryGetComponent(out BulletFly bullet);
-            if (bullet == null) return;
+            collision.gameObject.TryGetComponent(out WeaponDamage weapon);
+            if (weapon == null) return;
 
             //CheckIsCanDamage(collision.gameObject);
 
             Debug.Log(_currentHealth);
-            _currentHealth -= bullet.GetDamage;
+            _currentHealth -= weapon.GetDamage;
             if (_currentHealth <= 0)
                 gameObject.SetActive(false);
             else
@@ -50,6 +48,5 @@ namespace Fantasie
         //}
         #endregion
 #endif
-
     }
 }
