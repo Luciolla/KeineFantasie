@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using Random = System.Random;
 
@@ -11,10 +10,12 @@ namespace Fantasie
         [SerializeField] private EnemyTypeEnum _enemyTypeType;
         [SerializeField] private EnemyBehaviourEnum _enemyBehaviour;
         [SerializeField] private GameObject _enemy;
+        [SerializeField] private List<GameObject> _weaponList; //todo fix crutch
         [SerializeField] private float _patrolRadius;
         [Header("components links")]
         [SerializeField] private CheckLayer _checkLayer;
         [SerializeField] private ShootWeapon _weapon;
+        [SerializeField] private AttackTrigger _attackTrigger;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
 
@@ -29,6 +30,7 @@ namespace Fantasie
         private bool _isOnGround = false;
         private bool _isNotSeePlayer = true;
         private bool _isAttack = false;
+        private bool _isNoAttackCooldown = true;
 
         private void Awake()
         {
@@ -43,6 +45,7 @@ namespace Fantasie
             UpdateSpriteDirection();
             PrimitiveAISolutions();
             CheckPatrolRadius();
+            CheckForCauseDamage();
             _isOnGround = IsGrounded();
         }
 
@@ -53,10 +56,9 @@ namespace Fantasie
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;
 
             _isNotSeePlayer = false;
-            Debug.Log("Я тебя, сука, вижу!");
+            Debug.Log("Уууу, сцука, я тебя вижу!");
             _patrolState = 1;
             _lastPatrolState = 1;
-
         }
 
         private bool IsGrounded()
@@ -145,9 +147,35 @@ namespace Fantasie
         private void ApplyAnimation()
         {
             _animator.SetBool("is-Grounded", _isOnGround);
-            _animator.SetBool("is-Attack", _isAttack);
+            _animator.SetBool("is-Attack", _attackTrigger.GetCanAttack);
             _animator.SetBool("is-Walk", _rigidbody2D.velocity.x != 0 && _isOnGround);
             _animator.SetBool("is-Jump", _rigidbody2D.velocity.y != 0);
+        }
+
+        private void CheckForCauseDamage()
+        {
+            if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown)
+            {
+                _isNoAttackCooldown = false;
+                StartCoroutine(CauseDamageRutine());
+            }
+        }
+
+        private IEnumerator CauseDamageRutine()
+        {
+            ActiveWeapon(true);
+            yield return new WaitForSecondsRealtime(.1f);
+            ActiveWeapon(false);
+            yield return new WaitForSecondsRealtime(1f);
+            ActiveWeapon(false);
+            _isNoAttackCooldown = true;
+            yield break;
+        }
+
+        private void ActiveWeapon(bool value)
+        {
+            foreach (var weapon in _weaponList)
+                weapon.gameObject.SetActive(value);
         }
 
         private void UpdateSpriteDirection()
