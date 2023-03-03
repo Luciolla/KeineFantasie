@@ -21,6 +21,7 @@ namespace Fantasie
             set => _canShoot = value;
         }
 
+        private void Update() => Debug.Log(_canShoot);
         private void LateUpdate() => ApplyShoot();
 
         private void ApplyShoot()

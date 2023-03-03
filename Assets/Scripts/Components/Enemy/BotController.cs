@@ -7,7 +7,7 @@ namespace Fantasie
 {
     public class BotController : BaseInputController //todo separate to some new components
     {
-        [SerializeField] private EnemyTypeEnum _enemyTypeType;
+        [SerializeField] private EnemyTypeEnum _enemyType;
         [SerializeField] private EnemyBehaviourEnum _enemyBehaviour;
         [SerializeField] private GameObject _enemy;
         [SerializeField] private List<GameObject> _weaponList; //todo fix crutch
@@ -69,7 +69,6 @@ namespace Fantasie
         private void PrimitiveAISolutions()
         {
             //if (!_isNotSeePlayer) return;
-            Debug.Log(_patrolState);
             ApplyPatrol(_patrolState);
         }
 
@@ -138,36 +137,53 @@ namespace Fantasie
 
         private void OnShoot(bool value)
         {
-            if (value)
-                _weapon.SetCanShoot = value;
-            else
-                _weapon.SetCanShoot = false;
+            var shoot = value ? _weapon.SetCanShoot = true : _weapon.SetCanShoot = false;
         }
 
         private void ApplyAnimation()
         {
             _animator.SetBool("is-Grounded", _isOnGround);
             _animator.SetBool("is-Attack", _attackTrigger.GetCanAttack);
-            _animator.SetBool("is-Walk", _rigidbody2D.velocity.x != 0 && _isOnGround);
-            _animator.SetBool("is-Jump", _rigidbody2D.velocity.y != 0);
+
+            if (_enemyType == EnemyTypeEnum.Melee || _enemyType == EnemyTypeEnum.Range)
+            {
+                _animator.SetBool("is-Walk", _rigidbody2D.velocity.x != 0 && _isOnGround);
+                _animator.SetBool("is-Jump", _rigidbody2D.velocity.y != 0);
+            }
         }
 
         private void CheckForCauseDamage()
         {
-            if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown)
+            if (CheckEnemyType())
             {
-                _isNoAttackCooldown = false;
-                StartCoroutine(CauseDamageRutine());
+                if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown)
+                {
+                    _isNoAttackCooldown = false;
+                    StartCoroutine(CauseDamageRutine());
+                }
+            }
+            else
+            {
+                if (_attackTrigger.GetCanAttack && _isNoAttackCooldown)
+                {
+                    _isNoAttackCooldown = false;
+                    StartCoroutine(CauseDamageRutine());
+                }
             }
         }
 
         private IEnumerator CauseDamageRutine()
         {
-            ActiveWeapon(true);
+            Debug.Log("И тут я начинаю шмалять");
+            if (_enemyType == EnemyTypeEnum.Melee || _enemyType == EnemyTypeEnum.FlyMelee)
+                ActiveWeapon(true);
+            if (_enemyType == EnemyTypeEnum.Range || _enemyType == EnemyTypeEnum.FlyRange)
+                OnShoot(true);
+
             yield return new WaitForSecondsRealtime(.1f);
             ActiveWeapon(false);
+            OnShoot(false);
             yield return new WaitForSecondsRealtime(1f);
-            ActiveWeapon(false);
             _isNoAttackCooldown = true;
             yield break;
         }
@@ -176,6 +192,12 @@ namespace Fantasie
         {
             foreach (var weapon in _weaponList)
                 weapon.gameObject.SetActive(value);
+        }
+
+        private bool CheckEnemyType()
+        {
+            var type = _enemyType == EnemyTypeEnum.Melee || _enemyType == EnemyTypeEnum.FlyMelee ? true : false;
+            return type;
         }
 
         private void UpdateSpriteDirection()

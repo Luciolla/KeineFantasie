@@ -9,8 +9,6 @@ namespace Fantasie
         private Camera _camera;
         private Quaternion _rotation;
 
-        public Quaternion GetRotation => _rotation;
-
         private void Awake()
         {
             _camera = Camera.main;

@@ -80,10 +80,7 @@ namespace Fantasie
 
         private void OnShoot(bool value)
         {
-            if (value)
-                _weapon.SetCanShoot = value;
-            else 
-                _weapon.SetCanShoot = false; //dunno is it relevant
+            var shoot = value ? _weapon.SetCanShoot = value : _weapon.SetCanShoot = false;
         }
 
         private void ApplyAnimation()
