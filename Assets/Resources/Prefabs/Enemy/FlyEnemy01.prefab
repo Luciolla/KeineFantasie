@@ -1246,6 +1246,7 @@ GameObject:
   - component: {fileID: 6037993684915083069}
   - component: {fileID: 6037993684915083068}
   - component: {fileID: 3784641582210902313}
+  - component: {fileID: 8760010747084023323}
   m_Layer: 0
   m_Name: FlyEnemy01
   m_TagString: Untagged
@@ -1301,7 +1302,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 13
+  m_Radius: 15
 --- !u!50 &6037993684915083059
 Rigidbody2D:
   serializedVersion: 4
@@ -1375,6 +1376,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <GetCreatureType>k__BackingField: 1
+--- !u!114 &8760010747084023323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6037993684915083062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f709aa75e1041ba4180267eba4ae7afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyAiming: {fileID: 124170603153015351}
+  _circleCollider: {fileID: 1318831348708965183}
 --- !u!1 &6037993685820201242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1514,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.5
 --- !u!114 &7696994970295468785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1513,7 +1528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider2D: {fileID: 8839300503666782051}
-  _enemyAiming: {fileID: 124170603153015351}
+  _canAttack: 0
 --- !u!114 &124170603153015351
 MonoBehaviour:
   m_ObjectHideFlags: 0
