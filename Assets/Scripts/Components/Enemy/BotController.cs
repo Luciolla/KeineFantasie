@@ -7,7 +7,7 @@ namespace Fantasie
 {
     public class BotController : BaseInputController //todo separate to some new components
     {
-        [SerializeField] private EnemyTypeEnum _enemyTypeType;
+        [SerializeField] private EnemyTypeEnum _enemyType;
         [SerializeField] private EnemyBehaviourEnum _enemyBehaviour;
         [SerializeField] private GameObject _enemy;
         [SerializeField] private List<GameObject> _weaponList; //todo fix crutch
@@ -31,10 +31,12 @@ namespace Fantasie
         private bool _isNotSeePlayer = true;
         private bool _isAttack = false;
         private bool _isNoAttackCooldown = true;
+        private bool _isEnemyMelee = true;
 
         private void Awake()
         {
             _startPosition = transform.position;
+            CheckEnemyMelee();
             StartCoroutine(StopEnemyForSomeReflectionRutine());
         }
 
@@ -69,7 +71,6 @@ namespace Fantasie
         private void PrimitiveAISolutions()
         {
             //if (!_isNotSeePlayer) return;
-            Debug.Log(_patrolState);
             ApplyPatrol(_patrolState);
         }
 
@@ -138,36 +139,52 @@ namespace Fantasie
 
         private void OnShoot(bool value)
         {
-            if (value)
-                _weapon.SetCanShoot = value;
-            else
-                _weapon.SetCanShoot = false;
+            var shoot = value ? _weapon.SetCanShoot = true : _weapon.SetCanShoot = false;
         }
 
         private void ApplyAnimation()
         {
             _animator.SetBool("is-Grounded", _isOnGround);
             _animator.SetBool("is-Attack", _attackTrigger.GetCanAttack);
-            _animator.SetBool("is-Walk", _rigidbody2D.velocity.x != 0 && _isOnGround);
-            _animator.SetBool("is-Jump", _rigidbody2D.velocity.y != 0);
+
+            if (_enemyType == EnemyTypeEnum.Melee || _enemyType == EnemyTypeEnum.Range)
+            {
+                _animator.SetBool("is-Walk", _rigidbody2D.velocity.x != 0 && _isOnGround);
+                _animator.SetBool("is-Jump", _rigidbody2D.velocity.y != 0);
+            }
         }
 
         private void CheckForCauseDamage()
         {
-            if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown)
-            {
-                _isNoAttackCooldown = false;
-                StartCoroutine(CauseDamageRutine());
-            }
+                if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown && _isEnemyMelee)
+                {
+                    _isNoAttackCooldown = false;
+                    StartCoroutine(CauseMeleeDamageRutine());
+                }
+            
+                if (_attackTrigger.GetCanAttack && _isNoAttackCooldown && !_isEnemyMelee)
+                {
+                    _isNoAttackCooldown = false;
+                    StartCoroutine(CauseRangeDamageRutine());
+                }
         }
 
-        private IEnumerator CauseDamageRutine()
+        private IEnumerator CauseMeleeDamageRutine()
         {
             ActiveWeapon(true);
             yield return new WaitForSecondsRealtime(.1f);
             ActiveWeapon(false);
-            yield return new WaitForSecondsRealtime(1f);
-            ActiveWeapon(false);
+            yield return new WaitForSecondsRealtime(.5f);
+            _isNoAttackCooldown = true;
+            yield break;
+        }
+
+        private IEnumerator CauseRangeDamageRutine()
+        {
+            OnShoot(true);
+            yield return new WaitForSecondsRealtime(.1f);
+            OnShoot(false);
+            yield return new WaitForSecondsRealtime(.5f);
             _isNoAttackCooldown = true;
             yield break;
         }
@@ -176,6 +193,23 @@ namespace Fantasie
         {
             foreach (var weapon in _weaponList)
                 weapon.gameObject.SetActive(value);
+        }
+
+        private void CheckEnemyMelee()
+        {
+            var type = true;
+            switch (_enemyType)
+            {
+                case EnemyTypeEnum.Melee:
+                case EnemyTypeEnum.FlyMelee:
+                    type = true;
+                    break;
+                case EnemyTypeEnum.Range:
+                case EnemyTypeEnum.FlyRange:
+                    type = false;
+                    break;
+            }
+            _isEnemyMelee = type;
         }
 
         private void UpdateSpriteDirection()
