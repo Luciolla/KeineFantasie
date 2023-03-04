@@ -31,10 +31,12 @@ namespace Fantasie
         private bool _isNotSeePlayer = true;
         private bool _isAttack = false;
         private bool _isNoAttackCooldown = true;
+        private bool _isEnemyMelee = true;
 
         private void Awake()
         {
             _startPosition = transform.position;
+            CheckEnemyMelee();
             StartCoroutine(StopEnemyForSomeReflectionRutine());
         }
 
@@ -154,36 +156,35 @@ namespace Fantasie
 
         private void CheckForCauseDamage()
         {
-            if (CheckEnemyType())
-            {
-                if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown)
+                if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown && _isEnemyMelee)
                 {
                     _isNoAttackCooldown = false;
-                    StartCoroutine(CauseDamageRutine());
+                    StartCoroutine(CauseMeleeDamageRutine());
                 }
-            }
-            else
-            {
-                if (_attackTrigger.GetCanAttack && _isNoAttackCooldown)
+            
+                if (_attackTrigger.GetCanAttack && _isNoAttackCooldown && !_isEnemyMelee)
                 {
                     _isNoAttackCooldown = false;
-                    StartCoroutine(CauseDamageRutine());
+                    StartCoroutine(CauseRangeDamageRutine());
                 }
-            }
         }
 
-        private IEnumerator CauseDamageRutine()
+        private IEnumerator CauseMeleeDamageRutine()
         {
-            Debug.Log("И тут я начинаю шмалять");
-            if (_enemyType == EnemyTypeEnum.Melee || _enemyType == EnemyTypeEnum.FlyMelee)
-                ActiveWeapon(true);
-            if (_enemyType == EnemyTypeEnum.Range || _enemyType == EnemyTypeEnum.FlyRange)
-                OnShoot(true);
-
+            ActiveWeapon(true);
             yield return new WaitForSecondsRealtime(.1f);
             ActiveWeapon(false);
+            yield return new WaitForSecondsRealtime(.5f);
+            _isNoAttackCooldown = true;
+            yield break;
+        }
+
+        private IEnumerator CauseRangeDamageRutine()
+        {
+            OnShoot(true);
+            yield return new WaitForSecondsRealtime(.1f);
             OnShoot(false);
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(.5f);
             _isNoAttackCooldown = true;
             yield break;
         }
@@ -194,10 +195,21 @@ namespace Fantasie
                 weapon.gameObject.SetActive(value);
         }
 
-        private bool CheckEnemyType()
+        private void CheckEnemyMelee()
         {
-            var type = _enemyType == EnemyTypeEnum.Melee || _enemyType == EnemyTypeEnum.FlyMelee ? true : false;
-            return type;
+            var type = true;
+            switch (_enemyType)
+            {
+                case EnemyTypeEnum.Melee:
+                case EnemyTypeEnum.FlyMelee:
+                    type = true;
+                    break;
+                case EnemyTypeEnum.Range:
+                case EnemyTypeEnum.FlyRange:
+                    type = false;
+                    break;
+            }
+            _isEnemyMelee = type;
         }
 
         private void UpdateSpriteDirection()

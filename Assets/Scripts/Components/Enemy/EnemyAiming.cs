@@ -20,7 +20,7 @@ namespace Fantasie
 
         private void OnAimMotion()
         {
-            if (_target == null) return;
+            if (_target == null && _staff == null) return;
 
             var angle = Mathf.Atan2(_target.transform.position.y - transform.position.y, _target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
 

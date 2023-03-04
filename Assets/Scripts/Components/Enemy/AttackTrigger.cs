@@ -20,20 +20,21 @@ namespace Fantasie
         {
             var status = other.TryGetComponent(out CreatureType type);
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;
-            PointoutShootTarget(other.gameObject);
             _canAttack = true;
+            if (_enemyAiming != null) PointoutShootTarget(other.gameObject);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             var status = other.TryGetComponent(out CreatureType type);
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;
-            PointoutShootTarget(null);
             _canAttack = false;
+            if (_enemyAiming != null) PointoutShootTarget(null);
         }
 
         private void PointoutShootTarget(GameObject value)
         {
+            Debug.Log("зашло" + _canAttack);
             _enemyAiming.SetTarget = value;
         }
     }
