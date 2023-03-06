@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7057804424844227015}
   - component: {fileID: 8181038757065415765}
   - component: {fileID: 1315848791537910788}
+  - component: {fileID: 5216578937425911704}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -154,6 +155,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _staff: {fileID: 0}
   _target: {fileID: 0}
+--- !u!114 &5216578937425911704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229409271244195774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc6f81e0fe153d48b0aaf54a9be17ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody2D: {fileID: 5229409272014702999}
+  _renderer: {fileID: 5229409271244195744}
 --- !u!1 &5229409271813389958
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e504ad27ee371241beef2b53fcc48a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speedMogdif: 0.9
   _enemyType: 0
   _enemyBehaviour: 0
   _enemy: {fileID: 0}
@@ -301,6 +317,7 @@ MonoBehaviour:
   _checkLayer: {fileID: 140709519378934416}
   _weapon: {fileID: 0}
   _attackTrigger: {fileID: 8181038757065415765}
+  _enemyAiming: {fileID: 1315848791537910788}
   _rigidbody2D: {fileID: 5229409272014702999}
   _animator: {fileID: 5229409271244195747}
 --- !u!114 &5229409272014703000
@@ -344,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyAiming: {fileID: 1315848791537910788}
+  _botController: {fileID: 5229409272014703001}
   _circleCollider: {fileID: 654347258934470043}
 --- !u!1001 &1669067657814749254
 PrefabInstance:

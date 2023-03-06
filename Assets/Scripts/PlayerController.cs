@@ -60,7 +60,7 @@ namespace Fantasie
             if (Direction == null) return;
             if (_isOnGround) _jumpCount = 0;
 
-            _xVelocity = Direction.x * _speed;
+            _xVelocity = Direction.x * (_speed * _speedMogdif);
             _yVelocity = _rigidbody2D.velocity.y;
             _rigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity);
         }
