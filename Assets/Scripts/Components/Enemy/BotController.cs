@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Fantasie
 {
@@ -16,22 +18,31 @@ namespace Fantasie
         [SerializeField] private CheckLayer _checkLayer;
         [SerializeField] private ShootWeapon _weapon;
         [SerializeField] private AttackTrigger _attackTrigger;
+        [SerializeField] private EnemyAiming _enemyAiming;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
 
         private Random _rand = new();
         private Vector2 _startPosition;
+        private GameObject _target;
         private float _xVelocity = 0f;
         private float _yVelocity = 0f;
         private int _jumpCount = 0;
         private int _patrolState = 0;
         private int _lastPatrolState = 0;
         private int _reflectionCooldown = 2;
+        private int _offset = 2;
         private bool _isOnGround = false;
         private bool _isNotSeePlayer = true;
         private bool _isAttack = false;
         private bool _isNoAttackCooldown = true;
         private bool _isEnemyMelee = true;
+
+        public GameObject SetTarget
+        {
+            get => _target;
+            set => _target = value;
+        }
 
         private void Awake()
         {
@@ -44,23 +55,10 @@ namespace Fantasie
         {
             OnMovement();
             ApplyAnimation();
-            UpdateSpriteDirection();
+            ApplyPatrol(_patrolState);
             PrimitiveAISolutions();
-            CheckPatrolRadius();
             CheckForCauseDamage();
             _isOnGround = IsGrounded();
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            var status = other.TryGetComponent(out CreatureType type);
-
-            if (type.GetCreatureType != CreatureTypeEnum.Player) return;
-
-            _isNotSeePlayer = false;
-            Debug.Log("Óóóó, ñöóêà, ÿ òåáÿ âèæó!");
-            _patrolState = 1;
-            _lastPatrolState = 1;
         }
 
         private bool IsGrounded()
@@ -70,8 +68,10 @@ namespace Fantasie
 
         private void PrimitiveAISolutions()
         {
-            //if (!_isNotSeePlayer) return;
-            ApplyPatrol(_patrolState);
+            if (_target == null)
+            {
+                CheckPatrolRadius();
+            }
         }
 
         private void ApplyPatrol(int state)
@@ -120,9 +120,15 @@ namespace Fantasie
             if (Direction == null) return;
             if (_isOnGround) _jumpCount = 0;
 
-            _xVelocity = Direction.x * _speed;
+            _xVelocity = Direction.x * (_speed * _speedMogdif);
             _yVelocity = _rigidbody2D.velocity.y;
-            _rigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity);
+
+            if (_target == null) _rigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity);
+            else
+                transform.position
+                    = Vector2.MoveTowards(transform.position, _target.transform.position,
+                        (_speed * _speedMogdif * Time.deltaTime));            
+
         }
 
         private void OnJump(bool value)
@@ -210,18 +216,6 @@ namespace Fantasie
                     break;
             }
             _isEnemyMelee = type;
-        }
-
-        private void UpdateSpriteDirection()
-        {
-            if (_rigidbody2D.velocity.x > 0 && _enemy.transform.localScale.x > 0)
-            {
-                _enemy.transform.localScale = new(_enemy.transform.localScale.x * -1, _enemy.transform.localScale.y, _enemy.transform.localScale.z);
-            }
-            else if (_rigidbody2D.velocity.x < 0 && _enemy.transform.localScale.x < 0)
-            {
-                _enemy.transform.localScale = new(_enemy.transform.localScale.x * -1, _enemy.transform.localScale.y, _enemy.transform.localScale.z);
-            }
         }
     }
 }

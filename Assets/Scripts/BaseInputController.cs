@@ -7,7 +7,8 @@ namespace Fantasie
     {
         public event Action<bool> OnJumpEvent;
         public event Action<bool> OnShootEvent;
-        
+
+        [SerializeField] protected float _speedMogdif = 1;
         protected float _speed = 5f;
         protected float _jumpspeed = 5f;
         protected float _damageJumpspeed = 3f;

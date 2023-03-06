@@ -11,6 +11,8 @@ namespace Fantasie
 
         private float _currentHealth;
 
+        public float GetHealth => _currentHealth;
+
         private void Awake()
         {
             _currentHealth = _maxHealth;

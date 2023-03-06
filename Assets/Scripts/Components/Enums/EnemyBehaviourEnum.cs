@@ -6,5 +6,6 @@
         Patrol = 1,
         Attack = 2,
         Flee = 4,
+        Travel = 8,
     }
 }
