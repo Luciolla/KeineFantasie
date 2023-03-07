@@ -158,10 +158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32910fa7e37869641982fabc3f9981ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponData: {fileID: 3559076048298712433, guid: fe10fd8a38c3ea241845d931573d0d93, type: 3}
   _bullet: {fileID: 599700390811761846}
   _bulletBody: {fileID: 3246956045626885844}
-  _bulletParent: {fileID: 6554495016692582984, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
   _firePoint: {fileID: 8702099976947265672, guid: c760092370281204fac287d7fe00f23a, type: 3}
+  _animator: {fileID: 599700390811761844}
   _lifeTime: 1
   _shootingForce: 100
 --- !u!114 &8924264907790160932
@@ -176,4 +177,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d094f61ca905d4f85ea8043cf15309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damageData: {fileID: 0}

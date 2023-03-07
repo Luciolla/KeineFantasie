@@ -22,12 +22,10 @@ namespace Fantasie
                 if (_rigidbody2D.velocity.x > 0)
                 {
                     _renderer.flipX = false;
-                    //_enemy.transform.localScale = new(_enemy.transform.localScale.x * -1, _enemy.transform.localScale.y, _enemy.transform.localScale.z);
                 }
                 else if (_rigidbody2D.velocity.x < 0)
                 {
                     _renderer.flipX = true;
-                    //_enemy.transform.localScale = new(_enemy.transform.localScale.x * -1, _enemy.transform.localScale.y, _enemy.transform.localScale.z);
                 }
             }
         }

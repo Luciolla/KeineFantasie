@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4682636288592911276}
   - component: {fileID: 5086476556154842657}
   m_Layer: 0
-  m_Name: PulseBullet (4)
+  m_Name: Bullet (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5334a60396bca40f19ac9d531fab2621, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8867924, g: 0.037646834, b: 0.037646834, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -158,12 +158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32910fa7e37869641982fabc3f9981ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponData: {fileID: 917597656277423605}
   _bullet: {fileID: 81898126732753329}
   _bulletBody: {fileID: 5763081620047984919}
-  _bulletParent: {fileID: 0}
   _firePoint: {fileID: 129647430467394308}
-  _lifeTime: 1
-  _shootingForce: 100
+  _animator: {fileID: 3087350092660833558}
 --- !u!114 &5086476556154842657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d094f61ca905d4f85ea8043cf15309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damageData: {fileID: 917597656277423605}
 --- !u!1 &129647430467394308
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +229,7 @@ GameObject:
   - component: {fileID: 9082028178882661488}
   - component: {fileID: 3038508853871244952}
   m_Layer: 0
-  m_Name: PulseBullet (3)
+  m_Name: Bullet (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,7 +312,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5334a60396bca40f19ac9d531fab2621, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8867924, g: 0.037646834, b: 0.037646834, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -372,12 +371,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32910fa7e37869641982fabc3f9981ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponData: {fileID: 917597656277423605}
   _bullet: {fileID: 1873815705796123223}
   _bulletBody: {fileID: 7763958821158497774}
-  _bulletParent: {fileID: 0}
   _firePoint: {fileID: 129647430467394308}
-  _lifeTime: 1
-  _shootingForce: 100
+  _animator: {fileID: 1583243458473536323}
 --- !u!114 &3038508853871244952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d094f61ca905d4f85ea8043cf15309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damageData: {fileID: 917597656277423605}
 --- !u!1 &2484047065016046937
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +405,7 @@ GameObject:
   - component: {fileID: 9222457982948686744}
   - component: {fileID: 7297708337907460116}
   m_Layer: 0
-  m_Name: PulseBullet (2)
+  m_Name: Bullet (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,7 +488,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5334a60396bca40f19ac9d531fab2621, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8867924, g: 0.037646834, b: 0.037646834, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -549,12 +547,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32910fa7e37869641982fabc3f9981ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponData: {fileID: 917597656277423605}
   _bullet: {fileID: 2484047065016046937}
   _bulletBody: {fileID: 5830261140630349086}
-  _bulletParent: {fileID: 0}
   _firePoint: {fileID: 129647430467394308}
-  _lifeTime: 1
-  _shootingForce: 100
+  _animator: {fileID: 8682308059607206822}
 --- !u!114 &7297708337907460116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d094f61ca905d4f85ea8043cf15309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damageData: {fileID: 917597656277423605}
 --- !u!1 &5962084299987443837
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +581,7 @@ GameObject:
   - component: {fileID: 8635262039544933241}
   - component: {fileID: 2312375446930184697}
   m_Layer: 0
-  m_Name: PulseBullet
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -667,7 +664,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5334a60396bca40f19ac9d531fab2621, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8867924, g: 0.037646834, b: 0.037646834, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -726,12 +723,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32910fa7e37869641982fabc3f9981ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponData: {fileID: 917597656277423605}
   _bullet: {fileID: 5962084299987443837}
   _bulletBody: {fileID: 6645078575420333356}
-  _bulletParent: {fileID: 0}
   _firePoint: {fileID: 129647430467394308}
-  _lifeTime: 1
-  _shootingForce: 100
+  _animator: {fileID: 3893840473999769971}
 --- !u!114 &2312375446930184697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,7 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d094f61ca905d4f85ea8043cf15309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damageData: {fileID: 917597656277423605}
 --- !u!1 &6858245571345788976
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +816,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aebeab716d07a4a0584a05bca757ed93, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.033018887, b: 0.033018887, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -861,6 +857,7 @@ GameObject:
   - component: {fileID: 833244221744690611}
   - component: {fileID: 7195274826729147878}
   - component: {fileID: 2675145487419522847}
+  - component: {fileID: 917597656277423605}
   m_Layer: 0
   m_Name: NaturalWeapon
   m_TagString: Untagged
@@ -926,7 +923,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9339623, g: 0.074893214, b: 0.074893214, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -956,6 +953,24 @@ MonoBehaviour:
   - {fileID: 1873815705796123223}
   - {fileID: 81898126732753329}
   _shootingSpeed: 60
+--- !u!114 &917597656277423605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390334864550225100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4e4645ffb88aa48952d36cec42f1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: NaturalWeapon
+  _imageList: []
+  _projectileAnimation: {fileID: 9100000, guid: 2216a07adddae4cf792492157b6ffa0e, type: 2}
+  _projectileDamage: 5
+  _projectileLifeTime: 1
+  _weaponShootForce: 35
 --- !u!1 &7991355332756809619
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +987,7 @@ GameObject:
   - component: {fileID: 8377608491157485779}
   - component: {fileID: 29285338914739134}
   m_Layer: 0
-  m_Name: PulseBullet (1)
+  m_Name: Bullet (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1055,7 +1070,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5334a60396bca40f19ac9d531fab2621, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8867924, g: 0.037646834, b: 0.037646834, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1114,12 +1129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32910fa7e37869641982fabc3f9981ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponData: {fileID: 917597656277423605}
   _bullet: {fileID: 7991355332756809619}
   _bulletBody: {fileID: 3080312674071326023}
-  _bulletParent: {fileID: 0}
   _firePoint: {fileID: 129647430467394308}
-  _lifeTime: 1
-  _shootingForce: 100
+  _animator: {fileID: 8764442461542442339}
 --- !u!114 &29285338914739134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,4 +1146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d094f61ca905d4f85ea8043cf15309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 5
+  _damageData: {fileID: 917597656277423605}

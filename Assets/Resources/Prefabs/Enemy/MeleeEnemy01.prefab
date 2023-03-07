@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 5229409272014703000}
   - component: {fileID: 3448741594111555469}
   - component: {fileID: 2692267917464969470}
+  - component: {fileID: 5801923663597220611}
   m_Layer: 0
   m_Name: MeleeEnemy01
   m_TagString: Untagged
@@ -363,6 +364,24 @@ MonoBehaviour:
   _enemyAiming: {fileID: 1315848791537910788}
   _botController: {fileID: 5229409272014703001}
   _circleCollider: {fileID: 654347258934470043}
+--- !u!114 &5801923663597220611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229409272014702994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4e4645ffb88aa48952d36cec42f1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: Default
+  _imageList: []
+  _projectileAnimation: {fileID: 0}
+  _projectileDamage: 5
+  _projectileLifeTime: 0
+  _weaponShootForce: 0
 --- !u!1001 &1669067657814749254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -531,6 +550,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8924264907790160932, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _damageData
+      value: 
+      objectReference: {fileID: 5801923663597220611}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
 --- !u!1 &5739041789658903650 stripped
@@ -638,6 +661,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8924264907790160932, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _damageData
+      value: 
+      objectReference: {fileID: 5801923663597220611}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
 --- !u!4 &7661809816906918886 stripped
