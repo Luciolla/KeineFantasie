@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7028099302659881669}
   - component: {fileID: 7028099302659881670}
   - component: {fileID: -7821376091016963499}
+  - component: {fileID: 3559076048298712433}
   m_Layer: 0
   m_Name: Staff
   m_TagString: Untagged
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddaf4854f1d87347a513da7c412352b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sparks: {fileID: 4169051528518127373, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+  _sparks: {fileID: 2493876457445084288}
   _bulletList:
   - {fileID: 7028099301726490320}
   - {fileID: 4583381529142448531}
@@ -106,6 +107,91 @@ MonoBehaviour:
   - {fileID: 9053634710247708343}
   - {fileID: 4379156747384681290}
   _shootingSpeed: 60
+--- !u!114 &3559076048298712433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028099302675211761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4e4645ffb88aa48952d36cec42f1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: SimpleStuff
+  _weaponRenderer: {fileID: 7028099302659881670}
+  _weaponSprite: {fileID: -4247086462937861626, guid: dde2588f5e0bc7b4ab407c1ae99bd5c1, type: 3}
+  _projectileAnimation: {fileID: 9100000, guid: 21e01c75400c9d04bad24c4448401048, type: 2}
+  _projectileDamage: 5
+  _projectileLifeTime: 1
+  _weaponShootForce: 100
+--- !u!1001 &1965668585756296077
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 444388593259684134}
+    m_Modifications:
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957718841887775104, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169051528518127373, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_Name
+      value: _spark
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169051528518127373, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+--- !u!1 &2493876457445084288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4169051528518127373, guid: c9caf2314ed9a674081cba52426b77ca, type: 3}
+  m_PrefabInstance: {fileID: 1965668585756296077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3789624673136873468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,9 +203,13 @@ PrefabInstance:
       propertyPath: _firePoint
       value: 
       objectReference: {fileID: 3443053992509765159}
+    - target: {fileID: -5889428113877766345, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_Name
-      value: PulseBullet (4)
+      value: Bullet (4)
       objectReference: {fileID: 0}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_IsActive
@@ -169,6 +259,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8924264907790160932, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _damageData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
 --- !u!1 &4379156747384681290 stripped
@@ -187,9 +281,13 @@ PrefabInstance:
       propertyPath: _firePoint
       value: 
       objectReference: {fileID: 3443053992509765159}
+    - target: {fileID: -5889428113877766345, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_Name
-      value: PulseBullet (1)
+      value: Bullet (1)
       objectReference: {fileID: 0}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_IsActive
@@ -239,6 +337,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8924264907790160932, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _damageData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
 --- !u!1 &4583381529142448531 stripped
@@ -257,9 +359,13 @@ PrefabInstance:
       propertyPath: _firePoint
       value: 
       objectReference: {fileID: 3443053992509765159}
+    - target: {fileID: -5889428113877766345, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_Name
-      value: PulseBullet (2)
+      value: Bullet (2)
       objectReference: {fileID: 0}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_IsActive
@@ -309,6 +415,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8924264907790160932, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _damageData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
 --- !u!1 &4989382128605267509 stripped
@@ -394,9 +504,13 @@ PrefabInstance:
       propertyPath: _firePoint
       value: 
       objectReference: {fileID: 3443053992509765159}
+    - target: {fileID: -5889428113877766345, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_Name
-      value: PulseBullet
+      value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_IsActive
@@ -446,6 +560,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8924264907790160932, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _damageData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
 --- !u!1 &7028099301726490320 stripped
@@ -464,9 +582,13 @@ PrefabInstance:
       propertyPath: _firePoint
       value: 
       objectReference: {fileID: 3443053992509765159}
+    - target: {fileID: -5889428113877766345, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_Name
-      value: PulseBullet (3)
+      value: Bullet (3)
       objectReference: {fileID: 0}
     - target: {fileID: 599700390811761846, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
       propertyPath: m_IsActive
@@ -516,6 +638,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8924264907790160932, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
+      propertyPath: _damageData
+      value: 
+      objectReference: {fileID: 3559076048298712433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d57ec943b2b1736478e0443abde5944f, type: 3}
 --- !u!1 &9053634710247708343 stripped

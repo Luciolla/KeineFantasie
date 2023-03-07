@@ -136,7 +136,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponList:
   - {fileID: 1497126010085732986}
+  _UIWeaponImages: []
   _weaponAnchor: {fileID: 1497126010609659715}
+  _currentData: {fileID: 4911861454048201466}
 --- !u!1 &1497126011567856536
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +368,7 @@ PrefabInstance:
     - target: {fileID: 2885134503718562005, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
       propertyPath: _sparks
       value: 
-      objectReference: {fileID: 3381797646667898713}
+      objectReference: {fileID: 0}
     - target: {fileID: 2885134503718562005, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
       propertyPath: _shootingSpeed
       value: 120
@@ -516,11 +518,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6554495016692582984, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
   m_PrefabInstance: {fileID: 5634251972407551243}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3381797646667898713 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6980136714266294866, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
+--- !u!114 &4911861454048201466 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 728050037570891761, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}
   m_PrefabInstance: {fileID: 5634251972407551243}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497126010085732986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4e4645ffb88aa48952d36cec42f1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6522936732600557996 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1492593858492859559, guid: 7ce812d68f50ca94ea7b26aec0a475dd, type: 3}

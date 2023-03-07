@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Fantasie
 {
@@ -10,6 +11,7 @@ namespace Fantasie
         [SerializeField] private ShootWeapon _weapon;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
+        [SerializeField] private WeaponHolder _weaponHolder;
 
         private InputControls _controls;
 
@@ -43,6 +45,7 @@ namespace Fantasie
         protected override void FixedUpdate()
         {
             OnMovement();
+            OnWeaponChange();
             ApplyAnimation();
             UpdateSpriteDirection();
             _isOnGround = IsGrounded();
@@ -81,6 +84,34 @@ namespace Fantasie
         private void OnShoot(bool value)
         {
             var shoot = value ? _weapon.SetCanShoot = true : _weapon.SetCanShoot = false;
+        }
+
+        //private void OnPowerShoot(bool value)
+        //{
+        //    var shoot = value ? _weapon.SetCanShoot = true : _weapon.SetCanShoot = false;
+        //}
+
+        //private void OnUltimateShoot(bool value)
+        //{
+        //    var shoot = value ? _weapon.SetCanShoot = true : _weapon.SetCanShoot = false;
+        //}
+
+        private void OnWeaponChange()
+        {
+            if (Keyboard.current[Key.Digit1].isPressed)
+            {
+                _weaponHolder.ChangeWeaponData(0);
+            }
+
+            if (Keyboard.current[Key.Digit2].isPressed)
+            {
+                _weaponHolder.ChangeWeaponData(1);
+            }
+
+            if (Keyboard.current[Key.Digit3].isPressed)
+            {
+                _weaponHolder.ChangeWeaponData(2);
+            }
         }
 
         private void ApplyAnimation()
