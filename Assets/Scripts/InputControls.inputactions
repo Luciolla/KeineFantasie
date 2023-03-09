@@ -33,9 +33,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "CastUltimate",
                     "type": "Button",
                     "id": "e9c4be0a-291a-4eff-b854-40c5b4789e3f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HeavyShoot",
+                    "type": "Button",
+                    "id": "89229578-985b-4e30-9d49-1a87c3f83540",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interract",
+                    "type": "Button",
+                    "id": "fca929dd-f2e6-4315-8140-e56a74002387",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -94,7 +112,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
+                    "action": "CastUltimate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -130,6 +148,28 @@
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "86ab2285-3a5c-43b6-a042-359c64f00faa",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HeavyShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "593b7e86-a532-44f6-92f2-084bcf054d84",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
