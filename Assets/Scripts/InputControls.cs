@@ -57,9 +57,27 @@ namespace Fantasie
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""CastUltimate"",
                     ""type"": ""Button"",
                     ""id"": ""e9c4be0a-291a-4eff-b854-40c5b4789e3f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""89229578-985b-4e30-9d49-1a87c3f83540"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interract"",
+                    ""type"": ""Button"",
+                    ""id"": ""fca929dd-f2e6-4315-8140-e56a74002387"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -118,7 +136,7 @@ namespace Fantasie
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""CastUltimate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -154,6 +172,28 @@ namespace Fantasie
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86ab2285-3a5c-43b6-a042-359c64f00faa"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavyShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""593b7e86-a532-44f6-92f2-084bcf054d84"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -165,7 +205,9 @@ namespace Fantasie
             m_Player_Motion = m_Player.FindAction("Motion", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
-            m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_CastUltimate = m_Player.FindAction("CastUltimate", throwIfNotFound: true);
+            m_Player_HeavyShoot = m_Player.FindAction("HeavyShoot", throwIfNotFound: true);
+            m_Player_Interract = m_Player.FindAction("Interract", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -228,7 +270,9 @@ namespace Fantasie
         private readonly InputAction m_Player_Motion;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Shoot;
-        private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_CastUltimate;
+        private readonly InputAction m_Player_HeavyShoot;
+        private readonly InputAction m_Player_Interract;
         public struct PlayerActions
         {
             private @InputControls m_Wrapper;
@@ -236,7 +280,9 @@ namespace Fantasie
             public InputAction @Motion => m_Wrapper.m_Player_Motion;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
-            public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            public InputAction @CastUltimate => m_Wrapper.m_Player_CastUltimate;
+            public InputAction @HeavyShoot => m_Wrapper.m_Player_HeavyShoot;
+            public InputAction @Interract => m_Wrapper.m_Player_Interract;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -255,9 +301,15 @@ namespace Fantasie
                     @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                     @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                     @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                    @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                    @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                    @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                    @CastUltimate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastUltimate;
+                    @CastUltimate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastUltimate;
+                    @CastUltimate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastUltimate;
+                    @HeavyShoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyShoot;
+                    @HeavyShoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyShoot;
+                    @HeavyShoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyShoot;
+                    @Interract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
+                    @Interract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
+                    @Interract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInterract;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -271,9 +323,15 @@ namespace Fantasie
                     @Shoot.started += instance.OnShoot;
                     @Shoot.performed += instance.OnShoot;
                     @Shoot.canceled += instance.OnShoot;
-                    @Interact.started += instance.OnInteract;
-                    @Interact.performed += instance.OnInteract;
-                    @Interact.canceled += instance.OnInteract;
+                    @CastUltimate.started += instance.OnCastUltimate;
+                    @CastUltimate.performed += instance.OnCastUltimate;
+                    @CastUltimate.canceled += instance.OnCastUltimate;
+                    @HeavyShoot.started += instance.OnHeavyShoot;
+                    @HeavyShoot.performed += instance.OnHeavyShoot;
+                    @HeavyShoot.canceled += instance.OnHeavyShoot;
+                    @Interract.started += instance.OnInterract;
+                    @Interract.performed += instance.OnInterract;
+                    @Interract.canceled += instance.OnInterract;
                 }
             }
         }
@@ -283,7 +341,9 @@ namespace Fantasie
             void OnMotion(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
-            void OnInteract(InputAction.CallbackContext context);
+            void OnCastUltimate(InputAction.CallbackContext context);
+            void OnHeavyShoot(InputAction.CallbackContext context);
+            void OnInterract(InputAction.CallbackContext context);
         }
     }
 }
