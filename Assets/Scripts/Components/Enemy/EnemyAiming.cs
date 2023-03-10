@@ -16,7 +16,6 @@ namespace Fantasie
         }
 
         private void FixedUpdate() => OnAimMotion();
-        private void LateUpdate() => Debug.Log(_target);
 
         private void OnAimMotion()
         {

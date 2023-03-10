@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Fantasie
@@ -26,12 +27,11 @@ namespace Fantasie
 
             //CheckIsCanDamage(collision.gameObject);
 
-            Debug.Log(_currentHealth);
-            _currentHealth -= weapon.GetDamage;
+            if (weapon.IsHeavy) _currentHealth -= weapon.GetHeavyDamage;
+            else _currentHealth -= weapon.GetDamage;
+
             if (_currentHealth <= 0)
                 gameObject.SetActive(false);
-            else
-                Debug.Log(_currentHealth);
         }
 #if UNITY_EDITOR
         #region testInterface
