@@ -8,11 +8,16 @@ namespace Fantasie
     public class UIHelper : MonoBehaviour
     {
         [SerializeField] private TMP_Text _healthToString;
+        [SerializeField] private TMP_Text _energyToString;
         [SerializeField] private Slider _healthSlider;
+        [SerializeField] private Slider _energySlider;
         [SerializeField] private Health _healthComponent;
+        [SerializeField] private UltimateEnergy _energyComponent;
 
         private float _hpSliderValueModif = 100;
+        private float _energySliderValueModif = 100;
         private float _hpValue = 0;
+        private float _energyValue = 0;
         private int _gameSceneIndex = 1;
 
         public int GameSceneIndex
@@ -24,6 +29,7 @@ namespace Fantasie
         private void LateUpdate()
         {
             HealthUpdate();
+            UltimateUpdate();
         }
 
         public void StartGame()
@@ -33,7 +39,6 @@ namespace Fantasie
 
         public void ExitGame()
         {
-
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
@@ -45,6 +50,13 @@ namespace Fantasie
             _hpValue = _healthComponent.GetHealth;
             _healthToString.text = _hpValue.ToString();
             _healthSlider.value = _hpValue/ _hpSliderValueModif;
+        }
+
+        private void UltimateUpdate()
+        {
+            _energyValue = _energyComponent.GetEnergy;
+            _energyToString.text = _energyValue.ToString();
+            _energySlider.value = _energyValue / _energySliderValueModif;
         }
     }
 }

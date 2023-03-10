@@ -9,6 +9,7 @@ namespace Fantasie
         [Header("components links")]
         [SerializeField] private CheckLayer _checkLayer;
         [SerializeField] private ShootWeapon _weapon;
+        [SerializeField] private Ultimate _ultimate;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
         [SerializeField] private WeaponHolder _weaponHolder;
@@ -28,12 +29,18 @@ namespace Fantasie
             _controls.Player.Jump.canceled += _ => CallJump(false);
             _controls.Player.Shoot.performed += _ => CallShoot(true);
             _controls.Player.Shoot.canceled += _ => CallShoot(false);
+            _controls.Player.HeavyShoot.performed += _ => CallHeavyShoot(true);
+            _controls.Player.HeavyShoot.canceled += _ => CallHeavyShoot(false);
+            _controls.Player.CastUltimate.performed += _ => CallUltimate(true);
+            _controls.Player.CastUltimate.canceled += _ => CallUltimate(false);
         }
 
         private void OnEnable()
         {
             OnJumpEvent += OnJump;
             OnShootEvent += OnShoot;
+            OnHeavyShootEvent += OnHeavyShoot;
+            OnUltimateEvent += OnUltimate;
             _controls.Player.Enable();
         }
 
@@ -86,15 +93,15 @@ namespace Fantasie
             var shoot = value ? _weapon.SetCanShoot = true : _weapon.SetCanShoot = false;
         }
 
-        //private void OnPowerShoot(bool value)
-        //{
-        //    var shoot = value ? _weapon.SetCanShoot = true : _weapon.SetCanShoot = false;
-        //}
+        private void OnHeavyShoot(bool value)
+        {
+            var shoot = value ? _weapon.SetCanHeavyShoot = true : _weapon.SetCanHeavyShoot = false;
+        }
 
-        //private void OnUltimateShoot(bool value)
-        //{
-        //    var shoot = value ? _weapon.SetCanShoot = true : _weapon.SetCanShoot = false;
-        //}
+        private void OnUltimate(bool value)
+        {
+            var shoot = value ? _ultimate.SetCanUltimateShoot = true : _ultimate.SetCanUltimateShoot = false;
+        }
 
         private void OnWeaponChange()
         {
@@ -139,6 +146,8 @@ namespace Fantasie
         {
             OnJumpEvent -= OnJump;
             OnShootEvent -= OnShoot;
+            OnHeavyShootEvent -= OnHeavyShoot;
+            OnUltimateEvent -= OnUltimate;
             _controls.Dispose();
         }
     }
