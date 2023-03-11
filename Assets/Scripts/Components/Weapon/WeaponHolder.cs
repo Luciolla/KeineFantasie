@@ -35,10 +35,8 @@ namespace Fantasie
                 {
                     var firstImage = _UIWeaponImages[i];
                     _weaponList[i].TryGetComponent(out SpriteRenderer renderer);
-                    _weaponList[i].TryGetComponent(out ItemSpriteAnimate spriteAnimate);
                     firstImage.sprite = renderer.sprite;
                     firstImage.gameObject.SetActive(true);
-                    spriteAnimate.enabled = false;
                 }
             }
         }
