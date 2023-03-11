@@ -9,6 +9,7 @@ namespace Fantasie
         [SerializeField] private float _maxHealth;
         [SerializeField] private Collider2D _collider;
         [SerializeField] private Animator _animator;
+        [SerializeField] private GameObject _itemToDrop;
 
         private float _currentHealth;
 
@@ -31,7 +32,11 @@ namespace Fantasie
             else _currentHealth -= weapon.GetDamage;
 
             if (_currentHealth <= 0)
+            {
+                _itemToDrop.SetActive(true);
+                _itemToDrop.transform.SetParent(null);
                 gameObject.SetActive(false);
+            }
         }
 #if UNITY_EDITOR
         #region testInterface

@@ -9,15 +9,18 @@ namespace Fantasie
     {
         [SerializeField] private TMP_Text _healthToString;
         [SerializeField] private TMP_Text _energyToString;
+        [SerializeField] private TMP_Text _goldToString;
         [SerializeField] private Slider _healthSlider;
         [SerializeField] private Slider _energySlider;
         [SerializeField] private Health _healthComponent;
         [SerializeField] private UltimateEnergy _energyComponent;
+        [SerializeField] private PickUpItem _pickup;
 
         private float _hpSliderValueModif = 100;
         private float _energySliderValueModif = 100;
         private float _hpValue = 0;
         private float _energyValue = 0;
+        private int _goldValue = 0;
         private int _gameSceneIndex = 1;
 
         public int GameSceneIndex
@@ -30,6 +33,7 @@ namespace Fantasie
         {
             HealthUpdate();
             UltimateUpdate();
+            GoldUpdate();
         }
 
         public void StartGame()
@@ -57,6 +61,11 @@ namespace Fantasie
             _energyValue = _energyComponent.GetEnergy;
             _energyToString.text = _energyValue.ToString();
             _energySlider.value = _energyValue / _energySliderValueModif;
+        }
+        private void GoldUpdate()
+        {
+            _goldValue = _pickup.GetGold;
+            _goldToString.text = "Gold: " + _goldValue.ToString();
         }
     }
 }

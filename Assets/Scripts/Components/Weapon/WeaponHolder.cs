@@ -11,6 +11,11 @@ namespace Fantasie
         [SerializeField] private GameObject _weaponAnchor;
         [SerializeField] private WeaponData _currentData;
 
+        public GameObject GetWeapon
+        {
+            set => _weaponList.Add(value);
+        }
+
         private void Start()
         {
             ApplySprites();
@@ -30,8 +35,10 @@ namespace Fantasie
                 {
                     var firstImage = _UIWeaponImages[i];
                     _weaponList[i].TryGetComponent(out SpriteRenderer renderer);
+                    _weaponList[i].TryGetComponent(out ItemSpriteAnimate spriteAnimate);
                     firstImage.sprite = renderer.sprite;
                     firstImage.gameObject.SetActive(true);
+                    spriteAnimate.enabled = false;
                 }
             }
         }
