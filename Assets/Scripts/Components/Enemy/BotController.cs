@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
 using Vector2 = UnityEngine.Vector2;
@@ -136,9 +137,22 @@ namespace Fantasie
 
             if (_target == null) _rigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity);
             else
-                transform.position
-                    = Vector2.MoveTowards(transform.position, _target.transform.position,
-                        (_speed * _speedMogdif * Time.deltaTime));
+            {
+                var distance = Vector2.Distance(transform.position, _target.transform.position);
+                var direction = _target.transform.position - transform.position;
+                float playerDistance = direction.magnitude;
+
+                if (playerDistance < distance)
+                {
+                    direction.Normalize();
+                    _rigidbody2D.AddForce(direction * (_speed * _speedMogdif * Time.deltaTime));
+                }
+            }
+
+
+                // transform.position
+                //    = Vector2.MoveTowards(transform.position, _target.transform.position,
+                //        (_speed * _speedMogdif * Time.deltaTime));
 
         }
 
