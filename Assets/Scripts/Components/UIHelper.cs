@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using Slider = UnityEngine.UI.Slider;
 
 namespace Fantasie
 {
@@ -10,6 +10,8 @@ namespace Fantasie
         [SerializeField] private TMP_Text _healthToString;
         [SerializeField] private TMP_Text _energyToString;
         [SerializeField] private TMP_Text _goldToString;
+        [SerializeField] private GameObject _panelMenu;
+        [SerializeField] private GameObject _panelDeath;
         [SerializeField] private Slider _healthSlider;
         [SerializeField] private Slider _energySlider;
         [SerializeField] private Health _healthComponent;
@@ -22,6 +24,7 @@ namespace Fantasie
         private float _energyValue = 0;
         private int _goldValue = 0;
         private int _gameSceneIndex = 1;
+        private bool _isPauseMenuOpened = false;
 
         public int GameSceneIndex
         {
@@ -34,11 +37,14 @@ namespace Fantasie
             HealthUpdate();
             UltimateUpdate();
             GoldUpdate();
+            CheckForESC();
+            CheckForDeath();
         }
 
         public void StartGame()
         {
             SceneManager.LoadScene(sceneBuildIndex: GameSceneIndex);
+            Time.timeScale = 1f;
         }
 
         public void ExitGame()
@@ -49,11 +55,43 @@ namespace Fantasie
             Application.Quit();
         }
 
+        private void CheckForESC()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OpenMenu();
+            }
+        }
+
+        private void CheckForDeath()
+        {
+            if (_hpValue <= 0)
+                OpenDeathScreen();
+        }
+
+        private void OpenDeathScreen()
+        {
+            OpenCloseMenu(_panelDeath, false);
+        }
+
+        private void OpenMenu()
+        {
+            OpenCloseMenu(_panelMenu, _isPauseMenuOpened);
+            _isPauseMenuOpened = !_isPauseMenuOpened;
+        }
+
+        private void OpenCloseMenu(GameObject obj, bool activity)
+        {
+            obj.gameObject.SetActive(!activity);
+
+            var timeStop = !activity ? Time.timeScale = 0.00001f : Time.timeScale = 1f;
+        }
+
         private void HealthUpdate()
         {
             _hpValue = _healthComponent.GetHealth;
             _healthToString.text = _hpValue.ToString();
-            _healthSlider.value = _hpValue/ _hpSliderValueModif;
+            _healthSlider.value = _hpValue / _hpSliderValueModif;
         }
 
         private void UltimateUpdate()
