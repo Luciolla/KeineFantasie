@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = System.Random;
 using Vector2 = UnityEngine.Vector2;
@@ -21,6 +22,7 @@ namespace Fantasie
         [SerializeField] private EnemyAiming _enemyAiming;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
+        [SerializeField] private StepsSound _stepsSound;
 
         private Random _rand = new();
         private Vector2 _startPosition;
@@ -54,6 +56,7 @@ namespace Fantasie
         protected override void FixedUpdate()
         {
             OnMovement();
+            StepSoundOn();
             ApplyAnimation();
             ApplyPatrol(_patrolState);
             PrimitiveAISolutions();
@@ -79,15 +82,23 @@ namespace Fantasie
             switch (state)
             {
                 case 0:
-                    Direction = Vector2.left;
+                    GetDirection = Vector2.left;
                     break;
                 case 1:
-                    Direction = Vector2.zero;
+                    GetDirection = Vector2.zero;
                     break;
                 case 2:
-                    Direction = Vector2.right;
+                    GetDirection = Vector2.right;
                     break;
             }
+        }
+
+        private void StepSoundOn()
+        {
+            if (!_isEnemyMelee) return;
+            var rigidMove = _rigidbody2D.velocity.x != 0
+                ? _stepsSound.IsMoving = true
+                : _stepsSound.IsMoving = false;
         }
 
         private IEnumerator StopEnemyForSomeReflectionRutine()
@@ -117,17 +128,17 @@ namespace Fantasie
 
         private void OnMovement()
         {
-            if (Direction == null) return;
+            if (GetDirection == null) return;
             if (_isOnGround) _jumpCount = 0;
 
-            _xVelocity = Direction.x * (_speed * _speedMogdif);
+            _xVelocity = GetDirection.x * (_speed * _speedMogdif);
             _yVelocity = _rigidbody2D.velocity.y;
 
             if (_target == null) _rigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity);
             else
                 transform.position
                     = Vector2.MoveTowards(transform.position, _target.transform.position,
-                        (_speed * _speedMogdif * Time.deltaTime));            
+                        (_speed * _speedMogdif * Time.deltaTime));
 
         }
 
@@ -162,25 +173,27 @@ namespace Fantasie
 
         private void CheckForCauseDamage()
         {
-                if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown && _isEnemyMelee)
-                {
-                    _isNoAttackCooldown = false;
-                    StartCoroutine(CauseMeleeDamageRutine());
-                }
-            
-                if (_attackTrigger.GetCanAttack && _isNoAttackCooldown && !_isEnemyMelee)
-                {
-                    _isNoAttackCooldown = false;
-                    StartCoroutine(CauseRangeDamageRutine());
-                }
+            if (_attackTrigger.GetCanAttack && _attackTrigger.GetIsAttackSuccessful && _isNoAttackCooldown && _isEnemyMelee)
+            {
+                _isNoAttackCooldown = false;
+                StartCoroutine(CauseMeleeDamageRutine());
+            }
+
+            if (_attackTrigger.GetCanAttack && _isNoAttackCooldown && !_isEnemyMelee)
+            {
+                _isNoAttackCooldown = false;
+                StartCoroutine(CauseRangeDamageRutine());
+            }
         }
 
-        private IEnumerator CauseMeleeDamageRutine()
+        private IEnumerator CauseMeleeDamageRutine() //костыль
         {
-            ActiveWeapon(true);
-            yield return new WaitForSecondsRealtime(.1f);
-            ActiveWeapon(false);
-            yield return new WaitForSecondsRealtime(.5f);
+            if (_enemyAiming.SetTarget != null)
+            {
+                _enemyAiming.SetTarget.TryGetComponent(out Health health);
+                health.GetDamage = 5f;
+            }
+            yield return new WaitForSecondsRealtime(.6f);
             _isNoAttackCooldown = true;
             yield break;
         }
@@ -193,12 +206,6 @@ namespace Fantasie
             yield return new WaitForSecondsRealtime(.5f);
             _isNoAttackCooldown = true;
             yield break;
-        }
-
-        private void ActiveWeapon(bool value)
-        {
-            foreach (var weapon in _weaponList)
-                weapon.gameObject.SetActive(value);
         }
 
         private void CheckEnemyMelee()

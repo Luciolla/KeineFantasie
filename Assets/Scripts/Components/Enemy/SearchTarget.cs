@@ -11,22 +11,23 @@ namespace Fantasie
         private void OnTriggerStay2D(Collider2D other)
         {
             if (other == null) return;
-            var status = other.TryGetComponent(out CreatureType type);
-            if (type.GetCreatureType != CreatureTypeEnum.Player) return;
-
-            PointoutShootTarget(other.gameObject);
+            other.TryGetComponent(out CreatureType type);
+            if(type == null) return;
+            if (type.GetCreatureType == CreatureTypeEnum.Player)
+                PointShootTarget(other.gameObject);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other == null) return;
-            var status = other.TryGetComponent(out CreatureType type);
+            other.TryGetComponent(out CreatureType type);
+            if (type == null) return;
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;
 
-            PointoutShootTarget(null);
+            PointShootTarget(null);
         }
 
-        private void PointoutShootTarget(GameObject value)
+        private void PointShootTarget(GameObject value)
         {
             _enemyAiming.SetTarget = value;
             _botController.SetTarget = value;

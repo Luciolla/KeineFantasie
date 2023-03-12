@@ -13,6 +13,7 @@ namespace Fantasie
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
         [SerializeField] private WeaponHolder _weaponHolder;
+        [SerializeField] private StepsSound _stepsSound;
 
         private InputControls _controls;
 
@@ -52,6 +53,7 @@ namespace Fantasie
         protected override void FixedUpdate()
         {
             OnMovement();
+            StepSoundOn();
             OnWeaponChange();
             ApplyAnimation();
             UpdateSpriteDirection();
@@ -65,12 +67,11 @@ namespace Fantasie
 
         private void OnMovement()
         {
-            Direction = _controls.Player.Motion.ReadValue<Vector2>();
-
-            if (Direction == null) return;
+            GetDirection = _controls.Player.Motion.ReadValue<Vector2>();
+            if (GetDirection == null) return;
             if (_isOnGround) _jumpCount = 0;
 
-            _xVelocity = Direction.x * (_speed * _speedMogdif);
+            _xVelocity = GetDirection.x * (_speed * _speedMogdif);
             _yVelocity = _rigidbody2D.velocity.y;
             _rigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity);
         }
@@ -138,6 +139,17 @@ namespace Fantasie
             {
                 _player.transform.localScale = new(_player.transform.localScale.x * -1, _player.transform.localScale.y, _player.transform.localScale.z);
             }
+        }
+
+        private void StepSoundOn()
+        {
+            if (_isOnGround)
+            {
+                var RigidMoveTrue = _rigidbody2D.velocity.x != 0
+                    ? _stepsSound.IsMoving = true
+                    : _stepsSound.IsMoving = false;
+            }
+            else _stepsSound.IsMoving = false;
         }
 
         private void OnDisable() => _controls.Player.Disable();

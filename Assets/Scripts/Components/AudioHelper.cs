@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,14 +16,12 @@ namespace Fantasie
 
         private AudioClip _currentLevelMusic;
 
-        public static AudioHelper Instance { get; private set; }
         public IList<AudioClip> GetSFTList => _audioSFXList;
 
         public static int StageIndex = 0;
 
         private void Start()
         {
-            Instance = this;
             _currentLevelMusic = _musicList[StageIndex];
             PlayMusic();
         }
