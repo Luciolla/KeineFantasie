@@ -15,17 +15,20 @@ namespace Fantasie
         public void SuccessfulAttack() => _isAttackSuccesful = true;
         public void FailedAttack() => _isAttackSuccesful = false;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
-            var status = other.TryGetComponent(out CreatureType type);
+            if (other == null) return;
+            var types = other.TryGetComponent(out CreatureType type);
+            if (type == null) return;
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;
             _canAttack = true;
-
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            var status = other.TryGetComponent(out CreatureType type);
+            if (other == null) return;
+            var types =  other.TryGetComponent(out CreatureType type);
+            if (type == null) return;
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;
             _canAttack = false;
         }

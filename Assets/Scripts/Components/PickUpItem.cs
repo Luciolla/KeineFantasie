@@ -25,7 +25,6 @@ namespace Fantasie
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("что это? " + collision);
             collision.gameObject.TryGetComponent(out ShootWeapon weapon);
             if (weapon == null && _pickedUp!=true) return;
             _pickedUp = true;

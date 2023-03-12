@@ -9,7 +9,7 @@ namespace Fantasie
         [SerializeField] private float _rechargeInMunutes;
         [SerializeField] private float _amountOfRecharge;
 
-        private float _currentEnergy = 90;
+        private float _currentEnergy = 0;
         private int _rechargeModif = 60;
 
         public float GetEnergy
@@ -27,7 +27,6 @@ namespace Fantasie
             while (true)
             {
                 _currentEnergy += _amountOfRecharge;
-                Debug.Log(_currentEnergy);
                 yield return new WaitForSecondsRealtime(_rechargeModif/_rechargeInMunutes);
             }
         }

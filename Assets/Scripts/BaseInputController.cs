@@ -16,7 +16,7 @@ namespace Fantasie
         protected float _damageJumpspeed = 3f;
         protected float _interactionRadius = 1f;
 
-        public Vector2 Direction { get; protected set; }
+        public Vector2 GetDirection { get; protected set; }
 
         protected void CallJump(bool value) => OnJumpEvent?.Invoke(value);
         protected void CallShoot(bool value) => OnShootEvent?.Invoke(value);
