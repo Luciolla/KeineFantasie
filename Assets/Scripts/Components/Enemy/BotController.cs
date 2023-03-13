@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 namespace Fantasie
 {
@@ -24,6 +20,7 @@ namespace Fantasie
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
         [SerializeField] private StepsSound _stepsSound;
+        [SerializeField] private Health _health;
 
         private Random _rand = new();
         private Vector2 _startPosition;
@@ -34,10 +31,10 @@ namespace Fantasie
         private int _patrolState = 0;
         private int _lastPatrolState = 0;
         private int _reflectionCooldown = 2;
-        private int _offset = 2;
-        private bool _isOnGround = false;
-        private bool _isNotSeePlayer = true;
-        private bool _isAttack = false;
+        //private int _offset = 2;
+        private bool _isOnGround = true;
+        //private bool _isNotSeePlayer = true;
+        //private bool _isAttack = false;
         private bool _isNoAttackCooldown = true;
         private bool _isEnemyMelee = true;
 
@@ -56,13 +53,19 @@ namespace Fantasie
 
         protected override void FixedUpdate()
         {
+            if (_health.GetIsDead) return;
             OnMovement();
-            StepSoundOn();
+            _isOnGround = IsGrounded();
+        }
+
+        private void LateUpdate()
+        {
+            if (_health.GetIsDead) return;
             ApplyAnimation();
             ApplyPatrol(_patrolState);
             PrimitiveAISolutions();
             CheckForCauseDamage();
-            _isOnGround = IsGrounded();
+            StepSoundOn();
         }
 
         private bool IsGrounded()
@@ -132,28 +135,26 @@ namespace Fantasie
             if (GetDirection == null) return;
             if (_isOnGround) _jumpCount = 0;
 
-            _xVelocity = GetDirection.x * (_speed * _speedMogdif);
+            _xVelocity = GetDirection.x * (_speed);
             _yVelocity = _rigidbody2D.velocity.y;
 
             if (_target == null) _rigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity);
             else
             {
-                var distance = Vector2.Distance(transform.position, _target.transform.position);
-                var direction = _target.transform.position - transform.position;
-                float playerDistance = direction.magnitude;
+               transform.position
+                  = Vector2.MoveTowards(transform.position, _target.transform.position,
+                      (_speed * Time.fixedDeltaTime));
 
-                if (playerDistance < distance)
-                {
-                    direction.Normalize();
-                    _rigidbody2D.AddForce(direction * (_speed * _speedMogdif * Time.deltaTime));
-                }
+                //var distance = Vector3.Distance(transform.position, _target.transform.position);
+                //var direction = _target.transform.position - transform.position;
+                //var playerDistance = direction.magnitude;
+
+                //if (playerDistance < distance)
+                //{
+                //    direction.Normalize();
+                //    _rigidbody2D.AddForce(direction * (_speed * _speedMogdif * Time.fixedDeltaTime));
+                //}
             }
-
-
-                // transform.position
-                //    = Vector2.MoveTowards(transform.position, _target.transform.position,
-                //        (_speed * _speedMogdif * Time.deltaTime));
-
         }
 
         private void OnJump(bool value)

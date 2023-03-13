@@ -8,6 +8,8 @@ namespace Fantasie
     {
         [SerializeField] private GameObject _sparks;
         [SerializeField] private List<GameObject> _bulletList;
+        [SerializeField] private AudioSource _source;
+        [SerializeField] private List <AudioClip> _clip;
         [Header("Shoots per minute")]
         [SerializeField] private float _shootingSpeed;
         [SerializeField] private float _HeavyShootingSpeed;
@@ -43,6 +45,7 @@ namespace Fantasie
             {
                 _sparks.gameObject.SetActive(true);
                 _bulletList[_ammoCount].gameObject.SetActive(true);
+                _source.PlayOneShot(_clip[0]);
                 _ammoCount++;
                 StartCoroutine(OnShootRutine());
             }
@@ -54,6 +57,7 @@ namespace Fantasie
             {
                 _sparks.gameObject.SetActive(true);
                 _bulletList[_bulletList.Count-1].gameObject.SetActive(true);
+                _source.PlayOneShot(_clip[1]);
                 StartCoroutine(OnHeavyShootRutine());
             }
         }

@@ -53,11 +53,15 @@ namespace Fantasie
         protected override void FixedUpdate()
         {
             OnMovement();
-            StepSoundOn();
-            OnWeaponChange();
-            ApplyAnimation();
-            UpdateSpriteDirection();
             _isOnGround = IsGrounded();
+        }
+
+        private void LateUpdate()
+        {
+            ApplyAnimation();
+            OnWeaponChange();
+            StepSoundOn();
+            UpdateSpriteDirection();
         }
 
         private bool IsGrounded()
@@ -71,7 +75,7 @@ namespace Fantasie
             if (GetDirection == null) return;
             if (_isOnGround) _jumpCount = 0;
 
-            _xVelocity = GetDirection.x * (_speed * _speedMogdif);
+            _xVelocity = GetDirection.x * (_speed);
             _yVelocity = _rigidbody2D.velocity.y;
             _rigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity);
         }

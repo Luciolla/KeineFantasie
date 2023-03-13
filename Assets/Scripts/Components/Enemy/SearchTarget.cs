@@ -8,18 +8,20 @@ namespace Fantasie
         [SerializeField] private BotController _botController;
         [SerializeField] private CircleCollider2D _circleCollider;
 
-        private void OnTriggerStay2D(Collider2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other == null) return;
-            other.TryGetComponent(out CreatureType type);
-            if(type == null) return;
-            if (type.GetCreatureType == CreatureTypeEnum.Player)
-                PointShootTarget(other.gameObject);
+            if (!other.CompareTag("Player")) return;
+                other.TryGetComponent(out CreatureType type);
+                if (type == null) return;
+                if (type.GetCreatureType == CreatureTypeEnum.Player)
+                    PointShootTarget(other.gameObject);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other == null) return;
+            if (!other.CompareTag("Player")) return;
             other.TryGetComponent(out CreatureType type);
             if (type == null) return;
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;

@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Fantasie
@@ -12,8 +12,10 @@ namespace Fantasie
         [SerializeField] private GameObject _itemToDrop;
 
         private float _currentHealth;
+        private bool _isDead;
 
         public float GetHealth => _currentHealth;
+        public bool GetIsDead => _isDead;
 
         public float GetDamage
         {
@@ -40,8 +42,17 @@ namespace Fantasie
             {
                 _itemToDrop.SetActive(true);
                 _itemToDrop.transform.SetParent(null);
-                gameObject.SetActive(false);
+                StartCoroutine(PlayDeath());
             }
+        }
+
+        private IEnumerator PlayDeath()
+        {
+            _isDead = true;
+            _animator.SetBool("is-Dead", _isDead);
+            yield return new WaitForSecondsRealtime(1f);
+            gameObject.SetActive(false);
+            yield break;
         }
 #if UNITY_EDITOR
         #region testInterface

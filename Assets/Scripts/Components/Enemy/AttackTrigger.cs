@@ -18,7 +18,8 @@ namespace Fantasie
         private void OnTriggerStay2D(Collider2D other)
         {
             if (other == null) return;
-            var types = other.TryGetComponent(out CreatureType type);
+            if (!other.CompareTag("Player")) return;
+            other.TryGetComponent(out CreatureType type);
             if (type == null) return;
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;
             _canAttack = true;
@@ -27,7 +28,8 @@ namespace Fantasie
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other == null) return;
-            var types =  other.TryGetComponent(out CreatureType type);
+            if (!other.CompareTag("Player")) return;
+            other.TryGetComponent(out CreatureType type);
             if (type == null) return;
             if (type.GetCreatureType != CreatureTypeEnum.Player) return;
             _canAttack = false;

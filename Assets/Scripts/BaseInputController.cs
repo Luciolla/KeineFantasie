@@ -10,7 +10,6 @@ namespace Fantasie
         public event Action<bool> OnHeavyShootEvent;
         public event Action<bool> OnUltimateEvent;
 
-        [SerializeField] protected float _speedMogdif = 1;
         protected float _speed = 5f;
         protected float _jumpspeed = 5f;
         protected float _damageJumpspeed = 3f;

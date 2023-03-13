@@ -163,8 +163,6 @@ MonoBehaviour:
   _bulletBody: {fileID: 3246956045626885844}
   _firePoint: {fileID: 8702099976947265672, guid: c760092370281204fac287d7fe00f23a, type: 3}
   _animator: {fileID: 599700390811761844}
-  _lifeTime: 1
-  _shootingForce: 100
 --- !u!114 &8924264907790160932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +176,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageData: {fileID: 0}
+  _isHeavy: 0

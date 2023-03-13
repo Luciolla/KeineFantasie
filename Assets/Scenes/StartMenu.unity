@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.8773585, g: 0.5338644, b: 0.5338644, a: 1}
+    m_HighlightedColor: {r: 0.5377358, g: 0, b: 0, a: 1}
     m_PressedColor: {r: 0.9811321, g: 0.06016379, b: 0.06016379, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -738,8 +738,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthToString: {fileID: 0}
+  _energyToString: {fileID: 0}
+  _goldToString: {fileID: 0}
+  _panelMenu: {fileID: 0}
+  _panelDeath: {fileID: 0}
   _healthSlider: {fileID: 0}
+  _energySlider: {fileID: 0}
   _healthComponent: {fileID: 0}
+  _energyComponent: {fileID: 0}
+  _pickup: {fileID: 0}
 --- !u!82 &978963753
 AudioSource:
   m_ObjectHideFlags: 0
