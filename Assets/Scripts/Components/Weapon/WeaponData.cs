@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Fantasie
@@ -9,7 +8,7 @@ namespace Fantasie
         [SerializeField] private String _name = "Default";
         [SerializeField] private SpriteRenderer _weaponRenderer;
         [SerializeField] private Sprite _weaponSprite;
-        [SerializeField] private AnimatorController _projectileAnimation;
+        [SerializeField] private RuntimeAnimatorController _projectileAnimation;
         [SerializeField] private float _projectileDamage;
         [SerializeField] private float _projectileHeavyDamage;
         [SerializeField] private float _projectileLifeTime;
@@ -17,7 +16,7 @@ namespace Fantasie
 
         public String GetName => _name;
         public Sprite GetWeaponSprite => _weaponSprite;
-        public AnimatorController GetProjectileAnimation => _projectileAnimation;
+        public RuntimeAnimatorController GetProjectileAnimation => _projectileAnimation;
         public float GetProjectileDamage => _projectileDamage;
         public float GetProjectileHeavyDamage => _projectileHeavyDamage;
         public float GetProjectileLifeTime => _projectileLifeTime;

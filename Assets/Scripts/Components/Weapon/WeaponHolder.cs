@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Image = UnityEngine.UI.Image;
+using UnityEngine.UI;
 
 namespace Fantasie
 {
@@ -43,7 +43,7 @@ namespace Fantasie
 
         public void ChangeWeaponData(int index)
         {
-            if (_weaponList[index] == null) return;
+            if (index > _weaponList.Count-1) return;
 
             _weaponList[index].TryGetComponent(out WeaponData data);
             _currentData.TakeAnotherWeapon(data);

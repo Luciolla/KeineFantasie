@@ -7,6 +7,8 @@ namespace Fantasie
     {
         [SerializeField] private List<GameObject> _bulletList;
         [SerializeField] private UltimateEnergy _energy;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _audioClip;
 
         private bool _canUltimateShoot = false;
 
@@ -27,6 +29,7 @@ namespace Fantasie
                 foreach (var item in _bulletList)
                 {
                     item.SetActive(true);
+                    _audioSource.PlayOneShot(_audioClip);
                     _energy.GetEnergy = 0f;
                 }
             }
